@@ -118,11 +118,45 @@ a{ color:inherit; text-decoration:none; }
   position:absolute;
   inset:0;
   background-image: url("assets/images/hero-bg.jpg");
-  background-size: cover;
+  background-size: 120%;
   background-position: center;
+  background-attachment: fixed;
   filter: saturate(1.1) contrast(1.05);
   opacity: 0.85;
   z-index:-2;
+  animation: heroZoom 20s ease-in-out infinite alternate;
+  will-change: transform, background-position;
+  transition: transform 0.1s ease-out;
+}
+@keyframes heroZoom {
+  0% {
+    transform: scale(1);
+    background-position: center center;
+  }
+  100% {
+    transform: scale(1.05);
+    background-position: 50% 60%;
+  }
+}
+.hero-bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(124,92,255,0.25), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(45,212,191,0.20), transparent 50%);
+  animation: gradientShift 15s ease-in-out infinite alternate;
+  z-index: 1;
+}
+@keyframes gradientShift {
+  0% {
+    opacity: 0.6;
+    transform: translate(0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(20px, -20px);
+  }
 }
 .hero-bg::after{
   content:"";
@@ -131,6 +165,16 @@ a{ color:inherit; text-decoration:none; }
   background:
     linear-gradient(180deg, rgba(7,10,18,0.62), rgba(7,10,18,0.75)),
     radial-gradient(800px 400px at 50% 15%, rgba(124,92,255,0.30), transparent 60%);
+  animation: overlayPulse 12s ease-in-out infinite alternate;
+  z-index: 2;
+}
+@keyframes overlayPulse {
+  0% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .hero-content{
   max-width: 860px;
